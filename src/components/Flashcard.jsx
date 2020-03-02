@@ -7,6 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Flashcard() {
+export default function Flashcard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -28,37 +29,46 @@ export default function Flashcard() {
     setExpanded(!expanded);
   };
 
-  return (
-    <Card className={classes.root}>
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          category
-        </Typography>
-        <Typography variant="h5" component="h2">
-          some word
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <Button
-          color="primary"
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show answer"
-        >
-          Show Answer
+  const {
+    card: {
+      id, category, front, back,
+    },
+  } = props;
 
-        </Button>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+  return (
+    <>
+      <Card className={classes.root}>
         <CardContent>
-          <Typography paragraph>
-            Answer:
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
+            {category}
+          </Typography>
+          <Typography variant="h5" component="h2">
+            {front}
           </Typography>
         </CardContent>
-      </Collapse>
-    </Card>
+        <CardActions disableSpacing>
+          <Button
+            color="primary"
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show answer"
+          >
+            Show Answer
+
+          </Button>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>
+              {back}
+            </Typography>
+          </CardContent>
+        </Collapse>
+      </Card>
+      <Divider />
+    </>
   );
 }
