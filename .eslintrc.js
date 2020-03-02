@@ -23,10 +23,13 @@ module.exports = {
       "sourceType": "module"
   },
   "plugins": [
-      "react"
+      "react",
+      "react-hooks"
   ],
   "rules": {
       "no-console": "off",
-      "import/extensions": "off"
+      "import/extensions": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
   }
 };
