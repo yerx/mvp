@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
-// import HUE from '@material-ui/core/colors/HUE';
+import axios from 'axios';
 import FlashcardList from './FlashcardList.jsx';
 import FlashcardForm from './FlashcardForm.jsx';
 
@@ -21,6 +21,18 @@ export default function FlashcardApp() {
     },
   ];
   const [cards, setCards] = useState(initialCards);
+
+  useEffect(() => {
+    // axios get request
+    axios.get('/api/adventures')
+      .then((response) => {
+        const adventuresData = response.data;
+        setCards(adventuresData);
+      })
+      .catch((err) => {
+        console.error('Error with axios get: ', err);
+      });
+  });
 
   const addCard = (newCard) => {
     setCards([...cards, newCard]);

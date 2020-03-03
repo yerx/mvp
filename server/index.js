@@ -9,12 +9,17 @@ const db = require('../database/index.js');
 
 app.use(express.static('./public'));
 
-// get all info
-app.get('/', (req, res) => {
-
+// get all items
+app.get('/api/adventures', (req, res) => {
+  db.getData()
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(400).json('Error: ', err);
+    });
 });
 
-// get all items
 // get one item
 // post
 // put
