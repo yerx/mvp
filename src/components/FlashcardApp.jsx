@@ -7,38 +7,55 @@ import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
+// import HUE from '@material-ui/core/colors/HUE';
 import FlashcardList from './FlashcardList.jsx';
 import FlashcardForm from './FlashcardForm.jsx';
 
 export default function FlashcardApp() {
   const initialCards = [
     {
-      category: '1', front: 'front', back: 'back',
+      id: 1, category: 'kayaking', front: 'front', back: 'back',
     },
     {
-      category: '2', front: '2front', back: '2back',
+      id: 2, category: 'hiking', front: '2front', back: '2back',
     },
   ];
   const [cards, setCards] = useState(initialCards);
 
   const addCard = (newCard) => {
-    // setCards([...cards, {
-    //   id: 3, category: '3', front: '3front', back: '3back',
-    // }]);
     setCards([...cards, newCard]);
+  };
+
+  const deleteCard = (cardId) => {
+    console.log('deletecard', cardId);
+    const updateCards = cards.filter((card) => card.id !== cardId);
+
+    setCards(updateCards);
+  };
+
+  const updateCard = (cardId, editCard) => {
+    const updateCards = cards.map((card) => (cardId === card.id ? {
+      ...card, category: editCard.category, front: editCard.front, back: editCard.back,
+    } : card));
+
+    setCards(updateCards);
   };
 
   return (
     <Paper>
       <AppBar color="primary" position="static" style={{ height: '40px' }}>
         <Toolbar>
-          <Typography color="inherit">Flashcard App</Typography>
+          <Typography color="inherit">Outdoor Adventures</Typography>
         </Toolbar>
       </AppBar>
       <Grid container justify="center">
         <Grid item xs={11} md={8} lg={6}>
           <FlashcardForm addCard={addCard} />
-          <FlashcardList cards={cards} />
+          <FlashcardList
+            cards={cards}
+            deleteCard={deleteCard}
+            updateCard={updateCard}
+          />
         </Grid>
       </Grid>
     </Paper>

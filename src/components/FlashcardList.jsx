@@ -3,13 +3,16 @@ import Paper from '@material-ui/core/Paper';
 import Flashcard from './Flashcard.jsx';
 
 
-export default function FlashcardList(props) {
+export default function FlashcardList({ cards, deleteCard, updateCard }) {
   return (
     <div>
-      {props.cards.map((card) => (
+      {cards.map((card) => (
         <Flashcard
-          key={card.front}
+          key={card.id}
+          id={card.id}
           card={card}
+          deleteCard={deleteCard}
+          updateCard={updateCard}
         />
       ))}
     </div>

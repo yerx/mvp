@@ -6,6 +6,7 @@ import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
+import { v4 as uuidv4 } from 'uuid';
 import useInputState from '../hooks/useInputState.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,14 +20,11 @@ export default function FlashcardForm({ addCard }) {
   const [front, handleFront, resetFront] = useInputState('');
   const [back, handleBack, resetBack] = useInputState('');
 
-  // handleInputChange(e) {
-  //   e.preventDefault();
-  //   addCard()
-  // }
-
   const handleInputChange = (e) => {
     e.preventDefault();
+
     const newCard = {
+      id: uuidv4(),
       category,
       front,
       back,
@@ -35,9 +33,10 @@ export default function FlashcardForm({ addCard }) {
     console.log('new card', newCard);
 
     addCard(newCard);
+    resetCategory();
+    resetFront();
+    resetBack();
   };
-
-  // note changes - update form onSubmit to call the function handleInputChange
 
   return (
     <>
@@ -69,7 +68,6 @@ export default function FlashcardForm({ addCard }) {
               Add Card
             </Button>
           </form>
-
         </Card>
       </Paper>
       <Divider />
