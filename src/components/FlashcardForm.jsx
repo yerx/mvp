@@ -16,26 +16,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FlashcardForm({ addCard }) {
+  const [imageUrl, handleImageUrl, resetImageUrl] = useInputState('');
   const [category, handleCategory, resetCategory] = useInputState('');
-  const [front, handleFront, resetFront] = useInputState('');
-  const [back, handleBack, resetBack] = useInputState('');
+  const [description, handleDescription, resetDescription] = useInputState('');
+  const [details, handleDetails, resetDetails] = useInputState('');
+  const [review, handleReview, resetReview] = useInputState('');
+
 
   const handleInputChange = (e) => {
     e.preventDefault();
 
     const newCard = {
-      id: uuidv4(),
+      // id: uuidv4(),
+      imageUrl,
       category,
-      front,
-      back,
+      description,
+      details,
+      review,
     };
 
     console.log('new card', newCard);
 
     addCard(newCard);
-    resetCategory();
-    resetFront();
-    resetBack();
   };
 
   return (
@@ -44,6 +46,13 @@ export default function FlashcardForm({ addCard }) {
         <Card>
           <form onSubmit={handleInputChange}>
             <TextField
+              label="image"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={handleImageUrl}
+            />
+            <TextField
               label="category"
               InputLabelProps={{
                 shrink: true,
@@ -51,21 +60,28 @@ export default function FlashcardForm({ addCard }) {
               onChange={handleCategory}
             />
             <TextField
-              label="front"
+              label="description"
               InputLabelProps={{
                 shrink: true,
               }}
-              onChange={handleFront}
+              onChange={handleDescription}
             />
             <TextField
-              label="back"
+              label="details"
               InputLabelProps={{
                 shrink: true,
               }}
-              onChange={handleBack}
+              onChange={handleDetails}
+            />
+            <TextField
+              label="review"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={handleReview}
             />
             <Button type="submit" variant="contained" color="primary">
-              Add Card
+              Add Adventure
             </Button>
           </form>
         </Card>

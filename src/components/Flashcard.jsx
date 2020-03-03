@@ -103,7 +103,6 @@ export default function Flashcard({ card, deleteCard, updateCard }) {
                   </Typography>
                 </CardContent>
               </Collapse>
-
             </>
           )}
       </Card>

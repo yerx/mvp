@@ -16,12 +16,22 @@ app.get('/api/adventures', (req, res) => {
       res.status(200).json(data);
     })
     .catch((err) => {
-      res.status(400).json('Error: ', err);
+      res.status(400).json(`Error: ${err}`);
     });
 });
 
-// get one item
 // post
+app.post('/api/adventures', (req, res) => {
+  console.log('req.body', req.body);
+  db.postData(req.body)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
+
+// get one item
 // put
 // delete
 

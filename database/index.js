@@ -23,10 +23,32 @@ const getData = () => new Promise((resolve, reject) => {
     });
 });
 
+const postData = (data) => new Promise((resolve, reject) => {
+  const { imageUrl } = data;
+  const { category } = data;
+  const { description } = data;
+  const { review } = data;
+
+  const newAdventure = new Adventure({
+    imageUrl,
+    category,
+    description,
+    review,
+  });
+
+  newAdventure.save()
+    .exec((err, result) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(resul);
+    });
+});
+
 module.exports = {
   db,
   getData,
   // updateData,
   // deleteData,
-  // createData,
+  postData,
 };

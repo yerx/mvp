@@ -12,18 +12,9 @@ import FlashcardList from './FlashcardList.jsx';
 import FlashcardForm from './FlashcardForm.jsx';
 
 export default function FlashcardApp() {
-  const initialCards = [
-    {
-      id: 1, category: 'kayaking', front: 'front', back: 'back',
-    },
-    {
-      id: 2, category: 'hiking', front: '2front', back: '2back',
-    },
-  ];
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    // axios get request
     axios.get('/api/adventures')
       .then((response) => {
         const adventuresData = response.data;
@@ -35,7 +26,20 @@ export default function FlashcardApp() {
   });
 
   const addCard = (newCard) => {
-    setCards([...cards, newCard]);
+    console.log('start post', newCard);
+    axios.post('/api/adventures', newCard)
+      .then((res) => {
+        console.log('post, then get', res);
+        return axios.get('/api/adventures');
+      })
+      .then((res) => {
+        const addNewCard = res.data[res.data.length - 1];
+        console.log('newCard', addNewCard);
+        return setCards([...cards, addNewCard]);
+      })
+      .catch((err) => {
+        console.error('Error with post', err);
+      });
   };
 
   const deleteCard = (cardId) => {
