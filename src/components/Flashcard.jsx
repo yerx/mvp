@@ -57,20 +57,16 @@ export default function Flashcard({ card, deleteCard, updateCard }) {
               <CardContent>
                 <CardMedia
                   className={classes.media}
-                  image="https://picsum.photos/id/1011/200/200"
+                  image={card.imageUrl}
                 />
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                   {card.category}
                 </Typography>
                 <Typography variant="h5" component="h2">
-                  {card.front}
+                  {card.description}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  City, State
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  This impressive paella is a perfect party dish and a fun meal to cook together with your
-                  guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                  {card.details}
                 </Typography>
               </CardContent>
               <CardActions disableSpacing>
@@ -99,8 +95,11 @@ export default function Flashcard({ card, deleteCard, updateCard }) {
               </CardActions>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                  <Typography paragraph>
-                    {card.back}
+                  <Typography variant="h6" component="h2">
+                    Details
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {card.review}
                   </Typography>
                 </CardContent>
               </Collapse>

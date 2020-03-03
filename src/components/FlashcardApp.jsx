@@ -20,7 +20,7 @@ export default function FlashcardApp() {
       id: 2, category: 'hiking', front: '2front', back: '2back',
     },
   ];
-  const [cards, setCards] = useState(initialCards);
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     // axios get request
