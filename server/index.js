@@ -30,9 +30,4 @@ app.post('/api/adventures', (req, res) => {
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
-
-// get one item
-// put
-// delete
-
 app.listen(port, () => console.log(`Listening on port ${port}`));

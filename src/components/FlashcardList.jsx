@@ -8,7 +8,7 @@ export default function FlashcardList({ cards, deleteCard, updateCard }) {
     <div>
       {cards.map((card) => (
         <Flashcard
-          key={card.id}
+          key={card.description}
           id={card.id}
           card={card}
           deleteCard={deleteCard}

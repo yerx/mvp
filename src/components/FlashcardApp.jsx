@@ -25,9 +25,11 @@ export default function FlashcardApp() {
       });
   });
 
+
   const addCard = (newCard) => {
     console.log('start post', newCard);
-    axios.post('/api/adventures', newCard)
+
+    axios.post('http://localhost:5000/api/adventures', newCard)
       .then((res) => {
         console.log('post, then get', res);
         return axios.get('/api/adventures');
